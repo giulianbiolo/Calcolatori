@@ -140,6 +140,31 @@ $$00010 + 1 = 00011 (=3)$$
 Si scorrono i bit da destra fino al primo $1$ compreso lascio invariato, dal bit successivo applico il complemento a 1 invertendo il valore di ogni bit.  
 Oppure si può anche direttamente fare il complemento a $1$ di tutto il numero per poi sommare $1$.
 
+Somme e Sottrazioni Complemento a 2:  
+
+Con il complemento a 2 somme e sottrazioni si applicano facilmente anche con numeri negativi.  
+
+Esempio semplice:  
+$$k = 6,\space 5+12=0000101+001100$$  
+| | | | | | | | |
+|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
+|$0$|$0$|$0$|$0$|$1$|$0$|$1$| + |
+|$0$|$0$|$0$|$1$|$1$|$0$|$0$| = |
+|$0$|$0$|$1$|$0$|$0$|$0$|$1$| |
+
+Da cui $010001 = 17$.  
+Lo stesso si applica ai numeri negativi, che vanno scritti come: $$-8=\overline{0001000}+1=1110111+1=1111000$$  
+
+Le situazioni di overflow possono avvenire solo se entrambi i numeri hanno lo stesso segno nella codifica complemento a 2.  
+
+In aritmetica modulo $2^k$:  
+In situazione normale, ossia se $a + b < 2^k$ succede che $(a+b)\%2^k = (a+b)$ per cui otteniamo il risultato sperato.  
+Nel caso che avvenga $a + b \ge 2^k$ allora il risultato sarà $(a + b)\%2^k$ e quindi otteniamo un risultato *"strano"* che è proprio ciò che osserviamo quando abbiamo un overflow.  
+
+Nella codifica complemento a 2 avviene una cosa analoga:  
+Se $a + b < -2^{k-1}$ ottengo $a + b + 2^k$. **Positivo! Overflow.**  
+Se $a + b > 2^{k-1} - 1$ ottengo $a + b - 2^k$. **Negativo! Overflow.**  
+
 ---
 I Numeri Reali:
 ---------------
