@@ -78,9 +78,57 @@ Se un numero eccede i limiti della rappresentazione, quello che osserveremo sugl
 
 ### Operazioni:
 
+Sottrazione Di Naturali:
+
+$$214_{10}-117_{10}=11010110_2-1110101_2$$  
+| | | | | | | | |
+|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--|
+|$1$|$1$|$0$|$1$|$0$|$1$|$1$|$0$| - |
+| |$1$|$1$|$1$|$0$|$1$|$0$|$1$| = |
+||$1$|$1$|$0$|$0$|$0$|$0$|$1$| |
+
+Per cui:  
+$$214_{10}-117_{10}=1100001_2=97_{10}$$  
+
+Moltiplicazione E Divisione Di Naturali:  
+
+Per moltiplicare e dividere per $2$ ci basta shiftare tutti i bit a destra o a sinistra, proprio come in base decimale quando moltiplichiamo qualunque numero per $10$ dobbiamo solo aggiungere uno $0$ a destra.  
+Questa operazione è chiamata **shifting**.  
+La moltiplicazione di due numeri qualunque in binario è molto semplice, si tratta solo di sommare il primo numero allo shiftato di se stesso per ogni posizione con valore $1$ del secondo.  
+Ossia quello che facciamo è scorrere da destra a sinistra il secondo numero, e ad ogni $1$ posizioniamo il primo numero su quella posizione, in modo che il bit meno significativo del primo numero diventi il moltiplicatore $2^n$ ove $2^n$ è lo stesso moltiplicatore dell'$1$ del secondo numero, infine sommo tutti questi numeri shiftati.  
+
+---
+Gli Interi Con Segno:
+---------------------
+
+Ci sono varie codifiche che si possono utilizzare per rappresentare gli interi con segno:  
+- Modulo E Segno
+- Complemento a 1
+- Complemento a 2
+
+### La Codifica Modulo E Segno:  
+
+Si usano $k-1$ bit per rappresentare il valore assoluto dell'intero ed un bit, che sarà il più significativo (a sinistra) per rappresentare il segno, in modo tale che $0$ codifica i numeri positivi ed $1$ i numeri negativi.  
+In questo modo riusciamo a codificare i numeri in un range $[-2^{k-1} + 1,2^{k-1} - 1]$ dove $k$ è il numero di bit necessari per rappresentare l'intero.
+Stiamo però sprecando un numero ridondante, ossia lo zero, che può essere codificato sia come $0^+:000..0$ che come $0^-:100..0$.  
+Le somme e le sottrazioni sono complicate!
+
+
+### La Codifica In Complemento a 1:  
+
+Si usa il complemento a 1 del valore assoluto per rappresentare i numeri negativi.  
+- Numero Positivo: rappresento il valore assoluto
+- Numero Negativo: rappresento il complemento a 1 del valore assoluto  
+
+Per trovare il complemento a 1 di un numero ci basta invertire il valore di ogni bit del numero.  
+Anche qui abbiamo un numero ridondante, ossia lo zero, che può essere codificato sia come $0^+:000..0$ che come $0^-:111..1$.  
+
+La somma in questo caso è relativamente semplice, inoltre possiamo facilmente capire se finiamo in uno stato di **overflow** ossia se non bastano i bit per rappresentare il risultato.  
+
+
 
 
 ---
 I Numeri Reali:
 ---------------
-I Floating Point non vengono rappresentati in complemento a $2$ in C, ma si usa 
+I Floating Point non vengono rappresentati in complemento a $2$ in C.  
