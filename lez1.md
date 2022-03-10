@@ -124,9 +124,21 @@ Per trovare il complemento a 1 di un numero ci basta invertire il valore di ogni
 Anche qui abbiamo un numero ridondante, ossia lo zero, che può essere codificato sia come $0^+:000..0$ che come $0^-:111..1$.  
 
 La somma in questo caso è relativamente semplice, inoltre possiamo facilmente capire se finiamo in uno stato di **overflow** ossia se non bastano i bit per rappresentare il risultato.  
+Esempio:  
+$$6+(-3)=00110 + \overline{00011} = 00110+11100$$  
+| | | | | | |
+|:--:|:--:|:--:|:--:|:--:|:--:|
+|$0$|$0$|$1$|$1$|$0$| + |
+|$1$|$1$|$1$|$0$|$0$| = |
+|$0$|$0$|$0$|$1$|$0$| |
 
+Il risultato quindi è $00010$ con resto di $1$ per cui, dobbiamo sommare anche il resto:  
+$$00010 + 1 = 00011 (=3)$$  
 
+### La Codifica In Complemento a 2:  
 
+Si scorrono i bit da destra fino al primo $1$ compreso lascio invariato, dal bit successivo applico il complemento a 1 invertendo il valore di ogni bit.  
+Oppure si può anche direttamente fare il complemento a $1$ di tutto il numero per poi sommare $1$.
 
 ---
 I Numeri Reali:
